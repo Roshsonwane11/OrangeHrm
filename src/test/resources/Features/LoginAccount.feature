@@ -1,4 +1,3 @@
-@today
 Feature: Login functionality
 
   Scenario: Verify that the login URL loads properly
@@ -15,3 +14,6 @@ Feature: Login functionality
       | Admin1222    | admin123        |
       | Admin        | Testing         |
       | AdminTesting | passwordTesting |
+@today
+   Scenario: Verify user should not able to login with NULL username and password
+    When The user enters "null" username and "null" password then user should NOT able to login.

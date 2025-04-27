@@ -19,6 +19,8 @@ public class LoginAccountPage {
 	private WebElement loginBTN;
 	@FindBy(xpath = "//p[text()='Invalid credentials']")
 	private WebElement errorMsg;
+	@FindBy(xpath = "//span[text()='Required']")
+	private WebElement requiredmsg;
 
 	public LoginAccountPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -48,5 +50,17 @@ public class LoginAccountPage {
 		errorMsg.isDisplayed();
 		Assert.assertTrue(errorMsg.getText().contains("Invalid credentials"));
 
+	}
+
+	public void enterNULLCredentials(String username, String password) {
+		WaitFor.elementTobeVisible(userNameBox);
+		keyword.clickOn(userNameBox);
+		userNameBox.sendKeys("  ");
+		passwordInputBox.sendKeys("   ");
+		loginBTN.click();
+		WaitFor.elementTobeVisible(requiredmsg);
+		requiredmsg.isDisplayed();
+		Assert.assertTrue(requiredmsg.getText().contains("Required"));
+		
 	}
 }

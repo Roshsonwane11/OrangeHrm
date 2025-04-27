@@ -31,5 +31,12 @@ public class LoginAccountSteps {
 		loginAccountPage.enterInvalidCredentials(username, password);
 
 	}
+	
+	@When("The user enters {} username and {} password then user should NOT able to login.")
+	public void enterNULLCredentials(String username, String password) {
+		LoginAccountPage loginAccountPage = new LoginAccountPage();
+		loginAccountPage.enterNULLCredentials(username, password);
+		
+	}
 
 }
