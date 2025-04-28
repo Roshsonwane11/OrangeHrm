@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="CrossBrouserTesting" thread-count="3">
+  
+  <test name="Chrome Test">
+	  <parameter name="browserName" value="Chrome"></parameter>
+	  <classes>
+		  <class name="com.hrm.steps.Hooks"></class>
+		  <class name="com.hrm.Runner.TestRunner"></class>
+	  </classes>
+  </test>
+  
+  <test name="Firefox Test">
+	  <parameter name="browserName" value="Firefox"></parameter>
+	  <classes>
+		  <class name="com.hrm.steps.Hooks"></class>
+		  <class name="com.hrm.Runner.TestRunner"></class>
+	  </classes>
+  </test>
+  
+  <test name="Edge Test">
+	  <parameter name="browserName" value="Edge"></parameter>
+	  <classes>
+		  <class name="com.hrm.steps.Hooks"></class>
+		  <class name="com.hrm.Runner.TestRunner"></class>
+	  </classes>
+  </test>
+  
+</suite> <!-- Suite -->
