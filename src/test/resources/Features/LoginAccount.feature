@@ -14,6 +14,14 @@ Feature: Login functionality
       | Admin1222    | admin123        |
       | Admin        | Testing         |
       | AdminTesting | passwordTesting |
-@today
-   Scenario: Verify user should not able to login with NULL username and password
+
+  Scenario: Verify user should not able to login with NULL username and password
     When The user enters "null" username and "null" password then user should NOT able to login.
+
+  @today
+  Scenario: Verify user should not able to login with valid credentials
+    When The user enters Invalid credentials then user should NOT able to login
+      | username | password |
+      | user1    | pass123  |
+      | user2    | pass456  |
+      | user3    | pass789  |

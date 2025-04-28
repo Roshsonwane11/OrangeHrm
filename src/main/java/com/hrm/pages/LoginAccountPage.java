@@ -21,6 +21,20 @@ public class LoginAccountPage {
 	@FindBy(xpath = "//span[text()='Required']")
 	private WebElement requiredmsg;
 
+	@FindBy(xpath = "//div[@class=\"orangehrm-login-forgot\"]")
+	private WebElement forgot;
+	
+	
+	@FindBy(xpath = "//p[text()='Forgot your password? ']")
+	private WebElement forgotText;
+	
+	public String getForgotText() {
+		return forgotText.getText();
+	}
+	public void clickOnForgot() {
+		forgot.click();
+	}
+	
 	public LoginAccountPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -38,24 +52,6 @@ public class LoginAccountPage {
 		passwordInputBox.sendKeys("admin123");
 		loginBTN.click();
 	}
-
-	
-	
-	@FindBy(xpath = "//div[@class=\"orangehrm-login-forgot\"]")
-	private WebElement forgot;
-	
-	public void clickOnForgot() {
-		forgot.click();
-	}
-	
-	@FindBy(xpath = "//p[text()='Forgot your password? ']")
-	private WebElement forgotText;
-	
-	public String getForgotText() {
-		return forgotText.getText();
-	}
-	
-
 
 	public void enterInvalidCredentials(String username, String password) {
 		WaitFor.elementTobeVisible(userNameBox);
