@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
 import com.hrm.base.Keyword;
 import com.hrm.base.WaitFor;
 
@@ -63,4 +62,17 @@ public class LoginAccountPage {
 		Assert.assertTrue(requiredmsg.getText().contains("Required"));
 		
 	}
+
+	public void enterInvalidCredentialsuisngDataTable(String username1, String password1) {
+		WaitFor.elementTobeVisible(userNameBox);
+		keyword.clickOn(userNameBox);
+		userNameBox.sendKeys(username1);
+		passwordInputBox.sendKeys(password1);
+		loginBTN.click();
+		WaitFor.elementTobeVisible(errorMsg);
+		errorMsg.isDisplayed();
+		Assert.assertTrue(errorMsg.getText().contains("Invalid credentials"));
+	}
+	
+	
 }
