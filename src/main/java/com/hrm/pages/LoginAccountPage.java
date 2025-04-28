@@ -9,22 +9,27 @@ import com.hrm.base.Keyword;
 import com.hrm.base.WaitFor;
 
 public class LoginAccountPage {
-Keyword keyword = new Keyword();	
-	
+	Keyword keyword = new Keyword();
+
 	@FindBy(xpath = "//input[@name=\"username\"]")
 	private WebElement userNameBox;
 	@FindBy(xpath = "//input[@name=\"password\"]")
 	private WebElement passwordInputBox;
 	@FindBy(xpath = "//button[text()=' Login ']")
 	private WebElement loginBTN;
+	@FindBy(xpath = "//p[text()='Invalid credentials']")
+	private WebElement errorMsg;
+	@FindBy(xpath = "//span[text()='Required']")
+	private WebElement requiredmsg;
 
 	public LoginAccountPage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
 
 	public void OpenUrl() {
-		keyword.launchUrl("https://opensource-demo.orangehrmlive.com/");
-		Assert.assertTrue(Keyword.driver.getCurrentUrl().contains("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"));
+		// keyword.launchUrl("https://opensource-demo.orangehrmlive.com/");
+		Assert.assertTrue(Keyword.driver.getCurrentUrl()
+				.contains("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"), "URL NOT LOADING");
 	}
 
 	public void enterValidCredentials() throws InterruptedException {
@@ -34,6 +39,7 @@ Keyword keyword = new Keyword();
 		passwordInputBox.sendKeys("admin123");
 		loginBTN.click();
 	}
+
 	
 	
 	@FindBy(xpath = "//div[@class=\"orangehrm-login-forgot\"]")
@@ -50,4 +56,30 @@ Keyword keyword = new Keyword();
 		return forgotText.getText();
 	}
 	
+
+
+	public void enterInvalidCredentials(String username, String password) {
+		WaitFor.elementTobeVisible(userNameBox);
+		keyword.clickOn(userNameBox);
+		userNameBox.sendKeys(username);
+		passwordInputBox.sendKeys(password);
+		loginBTN.click();
+		WaitFor.elementTobeVisible(errorMsg);
+		errorMsg.isDisplayed();
+		Assert.assertTrue(errorMsg.getText().contains("Invalid credentials"));
+
+	}
+
+	public void enterNULLCredentials(String username, String password) {
+		WaitFor.elementTobeVisible(userNameBox);
+		keyword.clickOn(userNameBox);
+		userNameBox.sendKeys("  ");
+		passwordInputBox.sendKeys("   ");
+		loginBTN.click();
+		WaitFor.elementTobeVisible(requiredmsg);
+		requiredmsg.isDisplayed();
+		Assert.assertTrue(requiredmsg.getText().contains("Required"));
+		
+	}
+
 }
