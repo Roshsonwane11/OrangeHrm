@@ -39,6 +39,24 @@ public class LoginAccountPage {
 		loginBTN.click();
 	}
 
+	
+	
+	@FindBy(xpath = "//div[@class=\"orangehrm-login-forgot\"]")
+	private WebElement forgot;
+	
+	public void clickOnForgot() {
+		forgot.click();
+	}
+	
+	@FindBy(xpath = "//p[text()='Forgot your password? ']")
+	private WebElement forgotText;
+	
+	public String getForgotText() {
+		return forgotText.getText();
+	}
+	
+
+
 	public void enterInvalidCredentials(String username, String password) {
 		WaitFor.elementTobeVisible(userNameBox);
 		keyword.clickOn(userNameBox);
@@ -63,6 +81,7 @@ public class LoginAccountPage {
 		
 	}
 
+
 	public void enterInvalidCredentialsuisngDataTable(String username1, String password1) {
 		WaitFor.elementTobeVisible(userNameBox);
 		keyword.clickOn(userNameBox);
@@ -74,5 +93,5 @@ public class LoginAccountPage {
 		Assert.assertTrue(errorMsg.getText().contains("Invalid credentials"));
 	}
 	
-	
+
 }
