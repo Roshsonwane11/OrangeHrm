@@ -34,4 +34,20 @@ Keyword keyword = new Keyword();
 		passwordInputBox.sendKeys("admin123");
 		loginBTN.click();
 	}
+	
+	
+	@FindBy(xpath = "//div[@class=\"orangehrm-login-forgot\"]")
+	private WebElement forgot;
+	
+	public void clickOnForgot() {
+		forgot.click();
+	}
+	
+	@FindBy(xpath = "//p[text()='Forgot your password? ']")
+	private WebElement forgotText;
+	
+	public String getForgotText() {
+		return forgotText.getText();
+	}
+	
 }
