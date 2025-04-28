@@ -1,12 +1,11 @@
 package com.hrm.steps;
 
+import java.util.List;
+import java.util.Map;
 import org.testng.Assert;
-
 import com.hrm.base.Keyword;
-import com.hrm.base.WaitFor;
 import com.hrm.pages.LoginAccountPage;
-
-import io.cucumber.java.en.Then;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.When;
 
 public class LoginAccountSteps {
@@ -38,5 +37,21 @@ public class LoginAccountSteps {
 		loginAccountPage.enterNULLCredentials(username, password);
 		
 	}
+	
+	@When("The user enters Invalid credentials then user should NOT able to login")
+	public void enterInvalidCredentialUsingDatatable(DataTable dataTable) {
+		LoginAccountPage loginAccountPage = new LoginAccountPage();
+
+        List<Map<String, String>> credentialsList = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> credentials : credentialsList) {
+            String username1 = credentials.get("username");
+            String password1 = credentials.get("password");
+            loginAccountPage.enterInvalidCredentialsuisngDataTable(username1, password1);
+            
+        }
+
+	}
+	
 
 }
