@@ -45,6 +45,7 @@ public class LoginAccountPage {
 	private WebElement forgot;
 	
 	public void clickOnForgot() {
+		WaitFor.elementToBeClick(forgot);
 		forgot.click();
 	}
 	
