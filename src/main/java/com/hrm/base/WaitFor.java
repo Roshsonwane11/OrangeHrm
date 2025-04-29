@@ -22,4 +22,8 @@ public class WaitFor {
 			wait1.until(ExpectedConditions.urlContains(url));
 
 		}
+	 
+	 public static void elementToBeClick(WebElement ele) {
+		 wait.until(ExpectedConditions.elementToBeClickable(ele));
+	 }
 }
