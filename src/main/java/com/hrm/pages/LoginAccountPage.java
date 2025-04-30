@@ -20,10 +20,8 @@ public class LoginAccountPage {
 	private WebElement errorMsg;
 	@FindBy(xpath = "//span[text()='Required']")
 	private WebElement requiredmsg;
-
 	@FindBy(xpath = "//div[@class=\"orangehrm-login-forgot\"]")
 	private WebElement forgot;
-
 	@FindBy(xpath = "//p[text()='Forgot your password? ']")
 	private WebElement forgotText;
 
@@ -40,7 +38,6 @@ public class LoginAccountPage {
 	}
 
 	public void OpenUrl() {
-		// keyword.launchUrl("https://opensource-demo.orangehrmlive.com/");
 		Assert.assertTrue(Keyword.driver.getCurrentUrl()
 				.contains("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"), "URL NOT LOADING");
 	}
@@ -86,6 +83,18 @@ public class LoginAccountPage {
 		WaitFor.elementTobeVisible(errorMsg);
 		errorMsg.isDisplayed();
 		Assert.assertTrue(errorMsg.getText().contains("Invalid credentials"));
+	}
+
+	public void enterInvalidCredentialsUsingExcel(String username, String password) {
+		WaitFor.elementTobeVisible(userNameBox);
+		keyword.clickOn(userNameBox);
+		userNameBox.sendKeys(username);
+		passwordInputBox.sendKeys(password);
+		loginBTN.click();
+		WaitFor.elementTobeVisible(errorMsg);
+		errorMsg.isDisplayed();
+		Assert.assertTrue(errorMsg.getText().contains("Invalid credentials"));
+		
 	}
 
 }
