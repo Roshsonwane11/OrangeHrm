@@ -21,8 +21,8 @@ public class PersonalInformationManagementSteps {
 
 	@And("The user clicks on the {string} module in the menu")
 	public void clickOnPIM(String string) {
-		PersonalInformationManagementPage personalInformationManagementPage = new PersonalInformationManagementPage();
-		personalInformationManagementPage.clickOnPIM();
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.clickOnPIM();
 		Assert.assertTrue(Keyword.driver.getCurrentUrl().contains("pim"));
 	}
 
@@ -33,36 +33,36 @@ public class PersonalInformationManagementSteps {
 
 	@And("the user clicks on {string}")
 	public void clickOnAddEmployee(String string) {
-		PersonalInformationManagementPage personalInformationManagementPage = new PersonalInformationManagementPage();
-		personalInformationManagementPage.clickOnAddEmployee();
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.clickOnAddEmployee();
 		// WaitFor.untilUrlLoad("addEmployee");
 	}
 
 	@And("the user enters first name {string} middle name {string} & last name {string}")
 	public void enterfullname(String firstName, String middleName, String lastName) {
-		PersonalInformationManagementPage personalInformationManagementPage = new PersonalInformationManagementPage();
-		personalInformationManagementPage.enterfullname();
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.enterfullname(firstName, middleName, lastName);
 
 	}
 
-	@And("the user sets employee ID to {string}")
-	public void setEmployeeID(String empId) throws InterruptedException {
-		PersonalInformationManagementPage personalInformationManagementPage = new PersonalInformationManagementPage();
-		personalInformationManagementPage.setEmployeeID();
+	@And("the user sets employee ID")
+	public void setEmployeeID() throws InterruptedException {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.setEmployeeID();
 
 	}
 
 	@And("the user uploads a valid profile picture {string}")
 	public void setprofilePicture(String fileName) throws InterruptedException {
-		PersonalInformationManagementPage personalInformationManagementPage = new PersonalInformationManagementPage();
-		personalInformationManagementPage.setprofilePicture();
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.setprofilePicture();
 
 	}
 
 	@And("the user clicks the {string} button")
 	public void clickOnSavebtn(String btn) {
-		PersonalInformationManagementPage personalInformationManagementPage = new PersonalInformationManagementPage();
-		personalInformationManagementPage.clickOnSavebtn();
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.clickOnSavebtn();
 
 	}
 
@@ -73,4 +73,16 @@ public class PersonalInformationManagementSteps {
 		Assert.assertTrue(Keyword.driver.getCurrentUrl().contains("empNumber"));
 
 	}
+	@And("the user leaves first name and last name fields blank")
+	public void leaveFirstAndLastNameBlank() {
+	    PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+	    page.leaveFirstAndLastNameBlank();
+	}
+
+	@Then("the system should display validation error messages for required fields")
+	public void verifyRequiredFieldValidationMessages() {
+	    PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+	    page.isFirstNameRequiredErrorDisplayed();
+	}
+
 }

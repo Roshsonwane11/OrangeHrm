@@ -1,5 +1,8 @@
 package com.hrm.pages;
 
+import java.io.File;
+import java.util.List;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -26,9 +29,11 @@ public class PersonalInformationManagementPage {
 	private WebElement employeeId;
 	@FindBy(xpath = "//button[@type=\"submit\"]")
 	private WebElement saveBTN;
-	@FindBy(xpath = "//div[@class=\"oxd-file-div oxd-file-div--active\"]/button[@type=\"button\"]")
-	// @FindBy(xpath = "//input[@type=\"file\" and @class=\"oxd-file-input\"]")
+	// @FindBy(xpath = "*//input[@type=\"file\"]/following-sibling::div")
+	@FindBy(xpath = "//input[@type='file']")
 	private WebElement uploadImg;
+	@FindBy(xpath = "//div/span[text()='Required']")
+	private List<WebElement> RequiredError;
 
 	public PersonalInformationManagementPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -46,22 +51,23 @@ public class PersonalInformationManagementPage {
 		WaitFor.elementTobeVisible(firstName);
 	}
 
-	public void enterfullname() {
+	public void enterfullname(String fName, String mName, String lName) {
 		WaitFor.elementTobeVisible(firstName);
 		firstName.click();
-		firstName.sendKeys("Roshani");
+		firstName.sendKeys(fName);
+
 		WaitFor.elementTobeVisible(middleName);
 		middleName.click();
-		middleName.sendKeys("Rajendra");
+		middleName.sendKeys(mName);
+
 		WaitFor.elementTobeVisible(lastName);
 		lastName.click();
-		lastName.sendKeys("Sonawane");
+		lastName.sendKeys(lName);
 	}
 
 	public void setEmployeeID() throws InterruptedException {
 		employeeId.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
 		employeeId.click();
-		// employeeId.sendKeys("9272");
 		String uniqueId = String.valueOf((int) (Math.random() * 9000) + 1000); // Range: 1000-9999
 		employeeId.sendKeys(uniqueId);
 		System.out.println("Generated Employee ID: " + uniqueId);
@@ -69,18 +75,40 @@ public class PersonalInformationManagementPage {
 	}
 
 	public void setprofilePicture() throws InterruptedException {
-
-		WaitFor.elementTobeVisible(uploadImg);
-		uploadImg.click();
+         //for uploading file we need File file = new File(filePath);
 		String filePath = System.getProperty("user.dir") + "/src/test/resources/Features/datafiles/photo.png";
-		WaitFor.elementTobeVisible(uploadImg);
-		uploadImg.sendKeys(filePath);
+		System.out.println("Resolved file path: " + filePath);
+		File file = new File(filePath);
+		System.out.println("File exists: " + file.exists()); // Add this for debugging
 
+		uploadImg.sendKeys(file.getAbsolutePath());
 	}
 
 	public void clickOnSavebtn() {
 		WaitFor.elementTobeVisible(saveBTN);
 		saveBTN.click();
+
+	}
+
+	public void leaveFirstAndLastNameBlank() {
+		WaitFor.elementTobeVisible(firstName);
+		firstName.clear();
+		lastName.clear();
+
+	}
+
+	public void isFirstNameRequiredErrorDisplayed() {
+		boolean errorFound = false;
+		for (WebElement error : RequiredError) {
+
+			if (error.getText().contains("Required")) {
+				System.out.println("Required error displayed: " + error.getText());
+				errorFound = true;
+				break;
+			} else {
+				throw new RuntimeException("Required error message was not displayed for First Name field.");
+			}
+		}
 
 	}
 
