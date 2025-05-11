@@ -34,6 +34,8 @@ public class PersonalInformationManagementPage {
 	private WebElement uploadImg;
 	@FindBy(xpath = "//div/span[text()='Required']")
 	private List<WebElement> RequiredError;
+	@FindBy(xpath = "//span[text()='Should not exceed 30 characters']")
+	private WebElement firstNameLengthError;
 
 	public PersonalInformationManagementPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -111,5 +113,20 @@ public class PersonalInformationManagementPage {
 		}
 
 	}
+
+	public void enterLongFirstName(String fName) {
+		WaitFor.elementTobeVisible(firstName);
+		firstName.click();
+		firstName.sendKeys(fName);	
+	}
+
+	public void verifyFirstNameLengthErrorDisplayed() {
+	    WaitFor.elementTobeVisible(firstNameLengthError);
+	    String actualError = firstNameLengthError.getText();
+	    if (!actualError.equalsIgnoreCase("Should not exceed 30 characters")) {
+	        throw new AssertionError("Expected error not displayed. Found: " + actualError);
+	    }
+	}
+
 
 }

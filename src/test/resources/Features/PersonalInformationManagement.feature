@@ -1,4 +1,4 @@
-  @todays
+
 Feature: Personal Information Management functionality
 
   Scenario: Verify successful navigation to PIM Module
@@ -24,3 +24,20 @@ Feature: Personal Information Management functionality
     And the user leaves first name and last name fields blank
     And the user clicks the "Save" button
     Then the system should display validation error messages for required fields
+  
+  Scenario: Verify system should not allow to add employee with more than 30 characters in First Name
+  When The user is on the OrangeHRM login page
+  And The user clicks on the "PIM" module in the menu
+  And the user clicks on "Add Employee"
+  When user enters more than 30 "ABCDEFGHIJKLMNOPQRSTUVWXYZ12345" characters in First Name field
+  Then the system should display error message Should not exceed 30 characters
+ #Bug
+@todays  
+Scenario: Verify system should not allow special characters in employee name
+  When The user is on the OrangeHRM login page
+  And The user clicks on the "PIM" module in the menu
+  And the user clicks on "Add Employee"
+  And the user enters first name "@#Roshani!" middle name "Rajendra" & last name "@#sonawane"
+  And the user clicks the "Save" button
+  Then the system should display validation error for invalid characters
+    
