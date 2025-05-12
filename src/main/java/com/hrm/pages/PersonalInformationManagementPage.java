@@ -1,6 +1,7 @@
 package com.hrm.pages;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,6 +9,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.hrm.base.Keyword;
 import com.hrm.base.WaitFor;
@@ -34,6 +36,10 @@ public class PersonalInformationManagementPage {
 	private WebElement uploadImg;
 	@FindBy(xpath = "//div/span[text()='Required']")
 	private List<WebElement> RequiredError;
+	@FindBy(xpath = "//span[text()='Should not exceed 30 characters']")
+	private WebElement firstNameLengthError;
+	@FindBy(xpath = "//span[text()='Attachment Size Exceeded']")
+	private WebElement imagewithLargerFileErrorMsg;
 
 	public PersonalInformationManagementPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -111,5 +117,32 @@ public class PersonalInformationManagementPage {
 		}
 
 	}
+
+	public void enterLongFirstName(String fName) {
+		WaitFor.elementTobeVisible(firstName);
+		firstName.click();
+		firstName.sendKeys(fName);	
+	}
+
+	public void verifyFirstNameLengthErrorDisplayed() {
+	    WaitFor.elementTobeVisible(firstNameLengthError);
+	    String actualError = firstNameLengthError.getText();
+	    if (!actualError.equalsIgnoreCase("Should not exceed 30 characters")) {
+	        throw new AssertionError("Expected error not displayed. Found: " + actualError);
+	    }
+	}
+
+	public void uploadImagewithLargerFile() {
+		String filepath = System.getProperty("user.dir")+ "/src/test/resources/Features/datafiles/Image.jpg";
+	    File file = new File(filepath);
+	    uploadImg.sendKeys(file.getAbsolutePath());
+	}
+
+	public void validationErrorMessage() {
+		WaitFor.elementTobeVisible(imagewithLargerFileErrorMsg);
+		Assert.assertTrue(imagewithLargerFileErrorMsg.getText().contains("Attachment Size Exceeded"));
+		
+	}
+
 
 }

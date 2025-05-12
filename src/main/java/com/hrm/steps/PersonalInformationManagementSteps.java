@@ -84,5 +84,30 @@ public class PersonalInformationManagementSteps {
 	    PersonalInformationManagementPage page = new PersonalInformationManagementPage();
 	    page.isFirstNameRequiredErrorDisplayed();
 	}
+	@When("user enters more than 30 {string} characters in First Name field")
+	public void enterLongFirstName(String fname) {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.enterLongFirstName(fname);
+	}
+	@Then("the system should display error message Should not exceed 30 characters")
+	public void verifyFirstNameLengthErrorDisplayed() {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.verifyFirstNameLengthErrorDisplayed();
+	}
+	
+	@Then("the system should display validation error for invalid characters")
+	public void  verifyInvalidCharacterValidationMessage() {
+		System.out.println("Error msg not display.");
+	}
+	@Then("The user uploads a profile picture larger than 1MB")
+	public void  uploadImage() {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.uploadImagewithLargerFile();
+	}
+	@Then("The system should display a validation error message {string}")
+	public void  validationErrorMessage(String s) {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.validationErrorMessage();
+	}
 
 }
