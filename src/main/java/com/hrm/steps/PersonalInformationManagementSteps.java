@@ -99,5 +99,15 @@ public class PersonalInformationManagementSteps {
 	public void  verifyInvalidCharacterValidationMessage() {
 		System.out.println("Error msg not display.");
 	}
+	@Then("The user uploads a profile picture larger than 1MB")
+	public void  uploadImage() {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.uploadImagewithLargerFile();
+	}
+	@Then("The system should display a validation error message {string}")
+	public void  validationErrorMessage(String s) {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.validationErrorMessage();
+	}
 
 }
