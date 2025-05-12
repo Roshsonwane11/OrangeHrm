@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
 	    features = "src/test/resources/Features",
 	    glue = "com.hrm.steps",   
-	    tags = "@today"
+	    tags = "@today1"
 	)
 public class Runner extends AbstractTestNGCucumberTests{
 

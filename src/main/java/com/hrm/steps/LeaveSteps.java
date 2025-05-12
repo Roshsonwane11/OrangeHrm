@@ -1,10 +1,6 @@
 package com.hrm.steps;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import com.hrm.base.Keyword;
-import com.hrm.base.WaitFor;
 import com.hrm.pages.LeavePage;
 import com.hrm.pages.LoginAccountPage;
 
@@ -13,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class LeaveSteps {
+	
 
 	@When("User Logged in successfully")
 	public void userLoggedIn() throws InterruptedException {
@@ -22,14 +19,29 @@ public class LeaveSteps {
 	
 	@And("User click on {string} menu")
 	public void clickOnYourMenu(String menuName) throws InterruptedException {
-		Thread.sleep(3000);
-		Keyword keyword=new Keyword();
-		WebElement leaveMenu=Keyword.driver.findElement(By.xpath("//div[@class=\"oxd-sidepanel-body\"]/ul/li[3]"));
-		keyword.clickOn(leaveMenu);
+		LeavePage leavePage=new LeavePage();
+		leavePage.clickOnLeaveMenu(menuName);
 	}
 	@Then("User should navigate to {string} page with default tab selected as {string}")
 	public void verifyUserNavigateToLeavePage(String pageName, String defaultTabSelected) {
 		LeavePage leavePage=new LeavePage();
 		leavePage.verifyUserNavigatesToLeavePage(pageName,defaultTabSelected);
+	}
+	
+	@And("User select {string} as From Date from the calendar")
+	public void selectFromDate(String fromDate) throws InterruptedException {
+		LeavePage leavePage=new LeavePage();
+		leavePage.selectLeaveFromDate(fromDate);
+	}
+	@And("User select {string} as To Date from the calendar")
+	public void selectToDate(String toDate) {
+		LeavePage leavePage=new LeavePage();
+		leavePage.selectLeaveToDate(toDate);
+	}
+	
+	@Then("{string} format should be shown on both places.")
+	public void dateFormat(String dateAcceptedFormat) {
+		LeavePage leavePage=new LeavePage();
+		leavePage.verifyDateAcceptedFormat(dateAcceptedFormat);
 	}
 }
