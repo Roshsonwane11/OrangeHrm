@@ -44,4 +44,11 @@ public class LeaveSteps {
 		LeavePage leavePage=new LeavePage();
 		leavePage.verifyDateAcceptedFormat(dateAcceptedFormat);
 	}
+	
+	@Then("if not having any leave records then should show toast message as {string} else should not show any message.")
+	public void NoRecordsFoundMessageIfNoLeave(String NoRecordsExpectedMessage) {
+		LeavePage leavePage=new LeavePage();
+		leavePage.verifyNoRecordsFoundMessage(NoRecordsExpectedMessage);
+		
+	}
 }

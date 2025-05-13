@@ -8,25 +8,28 @@ import org.testng.Assert;
 import com.hrm.base.Keyword;
 import com.hrm.base.WaitFor;
 
-public class LeavePage{
+public class LeavePage {
 
-	Keyword keyword=new Keyword();
+	Keyword keyword = new Keyword();
 	@FindBy(xpath = "//h6[@class=\"oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module\"]")
 	private WebElement pageName;
 
-	@FindBy(xpath="//div[@class=\"oxd-sidepanel-body\"]/ul/li[3]")
+	@FindBy(xpath = "//div[@class=\"oxd-sidepanel-body\"]/ul/li[3]")
 	private WebElement leaveMenu;
 
-	@FindBy(xpath="//div[@class=\"oxd-form-row\"][1]/div/div[1]/div/div[2]/div/div/input")
+	@FindBy(xpath = "//div[@class=\"oxd-form-row\"][1]/div/div[1]/div/div[2]/div/div/input")
 	private WebElement leaveFromDate;
-	
-	@FindBy(xpath="//div[@class=\"oxd-form-row\"]/div/div[2]/div/div[2]/div/div/input")
+
+	@FindBy(xpath = "//div[@class=\"oxd-form-row\"]/div/div[2]/div/div[2]/div/div/input")
 	private WebElement leaveTodate;
-	
+
+	@FindBy(xpath = "//div[@class=\"orangehrm-header-container\"]/span")
+	private WebElement noRecordFoundMessage;
+
 	public LeavePage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
-	
+
 	public void verifyUserNavigatesToLeavePage(String pageName, String defaultTabSelected) {
 
 		WaitFor.untilUrlLoad("https://opensource-demo.orangehrmlive.com/web/index.php/leave/viewLeaveList");
@@ -46,7 +49,7 @@ public class LeavePage{
 	public void selectLeaveFromDate(String fromDate) throws InterruptedException {
 		WaitFor.elementTobeVisible(leaveFromDate);
 		leaveFromDate.clear();
-		leaveFromDate.sendKeys(fromDate);		
+		leaveFromDate.sendKeys(fromDate);
 		System.out.println("clicked on from date");
 
 	}
@@ -58,13 +61,20 @@ public class LeavePage{
 		System.out.println("clicked on to date");
 	}
 
-	
 	public void verifyDateAcceptedFormat(String dateAcceptedFormat) {
-		String dateFormatActual=leaveFromDate.getAttribute("placeholder");
-		
+		String dateFormatActual = leaveFromDate.getAttribute("placeholder");
 		Assert.assertEquals(dateFormatActual, dateAcceptedFormat);
-		
+
 	}
 
-	
+	public void verifyNoRecordsFoundMessage(String NoRecordsExpectedMessage) {
+		WaitFor.elementTobeVisible(noRecordFoundMessage);
+		if (noRecordFoundMessage.isDisplayed()) {
+			String noRecordFoundActualMessage = noRecordFoundMessage.getText();
+			System.out.println(noRecordFoundActualMessage);
+			Assert.assertEquals(noRecordFoundActualMessage, NoRecordsExpectedMessage);
+		} else {
+			Assert.assertFalse(noRecordFoundMessage.isDisplayed(), "Leave Records available");
+		}
+	}
 }
