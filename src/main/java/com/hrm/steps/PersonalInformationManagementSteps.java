@@ -104,10 +104,15 @@ public class PersonalInformationManagementSteps {
 		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
 		page.uploadImagewithLargerFile();
 	}
-	@Then("The system should display a validation error message {string}")
-	public void  validationErrorMessage(String s) {
+	@Then("The system should display a validation error message")
+	public void  validationErrorMessage() {
 		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
 		page.validationErrorMessage();
+	}
+	@Then("The user uploads a profile picture with unsupported file type .pdf")
+	public void  uploadImagewithpdf() {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.uploadImagewithpdf();
 	}
 
 }

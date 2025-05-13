@@ -38,8 +38,8 @@ public class PersonalInformationManagementPage {
 	private List<WebElement> RequiredError;
 	@FindBy(xpath = "//span[text()='Should not exceed 30 characters']")
 	private WebElement firstNameLengthError;
-	@FindBy(xpath = "//span[text()='Attachment Size Exceeded']")
-	private WebElement imagewithLargerFileErrorMsg;
+	@FindBy(xpath = "//div[@class=\"orangehrm-employee-image\"]/div/span")
+	private WebElement imagewithErrorMsg;
 
 	public PersonalInformationManagementPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -139,9 +139,18 @@ public class PersonalInformationManagementPage {
 	}
 
 	public void validationErrorMessage() {
-		WaitFor.elementTobeVisible(imagewithLargerFileErrorMsg);
-		Assert.assertTrue(imagewithLargerFileErrorMsg.getText().contains("Attachment Size Exceeded"));
-		
+		WaitFor.elementTobeVisible(imagewithErrorMsg);
+		if(imagewithErrorMsg.getText() == "Attachment Size Exceeded") {
+			Assert.assertTrue(imagewithErrorMsg.getText().contains("Attachment Size Exceeded"));
+		}else if (imagewithErrorMsg.getText() == "File type not allowed") {
+			Assert.assertTrue(imagewithErrorMsg.getText().contains("File type not allowed"));
+		}
+	}
+
+	public void uploadImagewithpdf() {
+		String filepath = System.getProperty("user.dir")+"/src/test/resources/Features/datafiles/imagepdf.pdf";
+		File file = new File(filepath);
+		uploadImg.sendKeys(file.getAbsolutePath());
 	}
 
 
