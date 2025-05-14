@@ -26,6 +26,7 @@ public class LoginAccountPage {
 	private WebElement forgotText;
 
 	public String getForgotText() {
+		WaitFor.elementTobeVisible(forgot);
 		return forgotText.getText();
 	}
 
@@ -97,5 +98,14 @@ public class LoginAccountPage {
 		Assert.assertTrue(errorMsg.getText().contains("Invalid credentials"));
 		
 	}
+	
+	private @FindBy(xpath = "//h5[text()='Login']")
+	WebElement loginText;
+	
+	public String getLoginText() {
+		WaitFor.elementTobeVisible(loginText);
+		return loginText.getText();
+	}
+	
 
 }

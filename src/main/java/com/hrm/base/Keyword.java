@@ -43,7 +43,7 @@ public class Keyword {
 	}
 
 	public void quitBrowser() {
-		//driver.quit();
+		driver.quit();
 	}
 
 	public void maximizeBrowser() {
