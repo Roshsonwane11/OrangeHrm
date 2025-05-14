@@ -30,6 +30,7 @@ public class LoginAccountPage {
 	}
 
 	public void clickOnForgot() {
+		WaitFor.elementTobeVisible(forgot);
 		forgot.click();
 	}
 
