@@ -20,7 +20,7 @@ Feature: Login functionality
     When The user enters "null" username and "null" password then user should NOT able to login.
 
   #dATATABLE
-  Scenario: Verify user should not able to login with valid credentials
+    Scenario: Verify user should not able to login with valid credentials
     When The user enters Invalid credentials then user should NOT able to login
       | username | password |
       | user1    | pass123  |
