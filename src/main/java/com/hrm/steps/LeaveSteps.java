@@ -45,10 +45,22 @@ public class LeaveSteps {
 		leavePage.verifyDateAcceptedFormat(dateAcceptedFormat);
 	}
 	
-	@Then("if not having any leave records then should show toast message as {string} else should not show any message.")
+	@Then("if not having any leave records then should show toast message as {string} else should display results.")
 	public void NoRecordsFoundMessageIfNoLeave(String NoRecordsExpectedMessage) {
 		LeavePage leavePage=new LeavePage();
 		leavePage.verifyNoRecordsFoundMessage(NoRecordsExpectedMessage);
 		
+	}
+	
+	@Then("User should see default From Date as {string} and To Date as {string}")
+	public void defaultFromDateAndToDate(String fromdate,String toDate) throws InterruptedException {
+		LeavePage leavePage=new LeavePage();
+		leavePage.verifyDefaultLeaveDates(fromdate,toDate);
+		
+	}
+	@And("User click on {string} button")
+	public void clickOnSearchButton(String searchButton) {
+		LeavePage leavePage=new LeavePage();
+		leavePage.clickOnSearchBtn(searchButton);
 	}
 }
