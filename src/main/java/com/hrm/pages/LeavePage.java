@@ -26,6 +26,9 @@ public class LeavePage {
 	@FindBy(xpath = "//div[@class=\"orangehrm-header-container\"]/span")
 	private WebElement noRecordFoundMessage;
 
+	@FindBy(xpath = "//button[@class=\"oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space\"]")
+	private WebElement searchButton;
+	
 	public LeavePage() {
 		PageFactory.initElements(Keyword.driver, this);
 	}
@@ -76,5 +79,32 @@ public class LeavePage {
 		} else {
 			Assert.assertFalse(noRecordFoundMessage.isDisplayed(), "Leave Records available");
 		}
+	}
+
+	public String getFromDate() {
+		String fromDate = leaveFromDate.getAttribute("placeholder");
+		System.out.println(fromDate);
+		return fromDate;
+	}
+
+	public String getToDate() {
+		String toDate = leaveTodate.getAttribute("placeholder");
+		System.out.println(toDate);
+		return toDate;
+	}
+
+	public void verifyDefaultLeaveDates(String expectedFromdate, String expectedToDate) throws InterruptedException {
+
+		Thread.sleep(3000);
+		Assert.assertEquals(getFromDate(), expectedFromdate);
+		Assert.assertEquals(getToDate(), expectedToDate);
+
+	}
+
+	public void clickOnSearchBtn(String searchButtonn) {
+
+		WaitFor.elementToBeClick(searchButton);
+		searchButton.click();
+		
 	}
 }
