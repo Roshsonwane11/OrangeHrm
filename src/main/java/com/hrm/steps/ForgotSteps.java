@@ -35,4 +35,16 @@ public class ForgotSteps {
 		Assert.assertTrue(actaulText.contains("Reset"));
 		
 	}
+	
+	@When("User Click on cancle button")
+	public void user_click_on_cancle_button() {
+		rpp.clickOnCancleButton();
+	}
+
+	@Then("User Should redirect to the Login Page")
+	public void user_should_redirect_to_the_login_page() {
+		Assert.assertTrue(lap.getLoginText().contains("Login"));
+	}
+
+	
 }

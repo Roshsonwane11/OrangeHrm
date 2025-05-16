@@ -22,4 +22,11 @@ public class ResetPasswordPage {
 		return resetPasswordText.getText();
 	}
 
+	private @FindBy(xpath = "//button[text()=' Cancel ']")
+	WebElement cancleButton;
+	
+	public void clickOnCancleButton() {
+		WaitFor.elementToBeClick(cancleButton);
+		cancleButton.click();
+	}
 }
