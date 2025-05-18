@@ -39,18 +39,24 @@ Feature: Personal Information Management functionality
     And the user clicks the "Save" button
     Then the system should display validation error for invalid characters
 
-
   Scenario: Verify system should not allow when user set invalid profile picture (too big)
     When The user is on the OrangeHRM login page
     And The user clicks on the "PIM" module in the menu
     And the user clicks on "Add Employee"
     Then The user uploads a profile picture larger than 1MB
     Then The system should display a validation error message
-    
- @todays
+
   Scenario: Verify system should not allow when user set invalid profile picture (too big)
     When The user is on the OrangeHRM login page
     And The user clicks on the "PIM" module in the menu
     And the user clicks on "Add Employee"
     Then The user uploads a profile picture with unsupported file type .pdf
-    Then The system should display a validation error message 
+    Then The system should display a validation error message
+
+  @todays
+  Scenario: verify First Name, last name should not accept more than 30 characters
+    When The user is on the OrangeHRM login page
+    And The user clicks on the "PIM" module in the menu
+    And the user clicks on "Add Employee"
+    When user enter more than 30 "JonathanChristopherAlexanderrie" characters in the First Name and last name field
+    Then User should see an error message "Should not exceed 30 characters"

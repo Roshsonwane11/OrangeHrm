@@ -114,5 +114,15 @@ public class PersonalInformationManagementSteps {
 		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
 		page.uploadImagewithpdf();
 	}
+	@When("user enter more than 30 {string} characters in the First Name and last name field")
+	public void  entermorethan30char(String s) {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.entermorethan30char(s);
+	}
+	@Then("User should see an error message {string}")
+	public void  erromsg30plusChar(String s) {
+		PersonalInformationManagementPage page = new PersonalInformationManagementPage();
+		page.erromsg30plusChar(s);
+	}
 
 }
