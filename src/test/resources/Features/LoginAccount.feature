@@ -21,7 +21,7 @@ Feature: Login functionality
 
 
   #dATATABLE
-    Scenario: Verify user should not able to login with valid credentials
+  Scenario: Verify user should not able to login with valid credentials
   Scenario: Verify user should not able to login with Invalid credential using DATATABLE
 
     When The user enters Invalid credentials then user should NOT able to login
