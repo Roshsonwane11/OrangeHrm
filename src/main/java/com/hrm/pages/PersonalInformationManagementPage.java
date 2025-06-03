@@ -1,5 +1,7 @@
 package com.hrm.pages;
 
+import static org.testng.Assert.assertTrue;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
@@ -40,6 +42,8 @@ public class PersonalInformationManagementPage {
 	private WebElement firstNameLengthError;
 	@FindBy(xpath = "//div[@class=\"orangehrm-employee-image\"]/div/span")
 	private WebElement imagewithErrorMsg;
+	@FindBy(xpath = "//span[text()='Should not exceed 30 characters']")
+	private List<WebElement> erromsg30plusChar;
 
 	public PersonalInformationManagementPage() {
 		PageFactory.initElements(Keyword.driver, this);
@@ -151,6 +155,21 @@ public class PersonalInformationManagementPage {
 		String filepath = System.getProperty("user.dir")+"/src/test/resources/Features/datafiles/imagepdf.pdf";
 		File file = new File(filepath);
 		uploadImg.sendKeys(file.getAbsolutePath());
+	}
+
+	public void entermorethan30char(String name){
+		WaitFor.elementTobeVisible(firstName);
+        firstName.sendKeys(name);
+        lastName.sendKeys(name);	
+	}
+
+	public void erromsg30plusChar(String s) {
+		for(WebElement erromsg30plusChar1: erromsg30plusChar) {
+			String result= erromsg30plusChar1.getText();
+			System.out.println(result);
+			assertTrue(result.contains("Should not exceed 30 characters"));
+		}
+		
 	}
 
 
